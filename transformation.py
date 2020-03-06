@@ -278,12 +278,13 @@ for a in range(len(info)):
             matrix_multiplication(scale(int(fin_info[0]),int(fin_info[1]),int(fin_info[2])),transformation_matrix)
         elif key=="rotate":
             fin_info=info[a+1].split()
-            print_matrix(rotation(int(fin_info[1]),fin_info[0]))
-            print_matrix(transformation_matrix)
+            #print_matrix(rotation(int(fin_info[1]),fin_info[0]))
+            #print_matrix(transformation_matrix)
             matrix_multiplication(rotation(int(fin_info[1]),fin_info[0]),transformation_matrix)
-            print_matrix(transformation_matrix)
+            #print_matrix(transformation_matrix)
         elif key=="apply":
             print_matrix(edge_matrix)
+            print_matrix(transformation_matrix)
             apply(transformation_matrix,edge_matrix)
             print_matrix(edge_matrix)
             #print_matrix(transformation_matrix)

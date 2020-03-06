@@ -1,0 +1,23 @@
+line
+0 0 0 100 0 0
+line
+100 0 0 100 100 0
+line
+100 100 0 0 100 0
+line
+0 100 0 0 0 0
+line
+0 0 0 100 0 0
+apply
+move
+10 10 10
+apply
+rotate
+x 90
+apply
+rotate
+y 60
+apply
+rotate
+z 90
+apply
