@@ -9,7 +9,7 @@ while(initVal<len(data)):
 def plot(x,y,color):# color is a list
     x+=250
     y=250-y
-    data[x+y*500]=color
+    data[round(x+y*500)]=color
 
 #for the first two octants, the x0 must be smaller than x1
 def firstoct(x0,y0,x1,y1,color):#oct 1 and 5
@@ -222,20 +222,20 @@ def x_rotation(angle):
     angle=math.radians(angle)
     matrix=new_matrix(4,4)
     ident(matrix)
-    update_matrix(1,1,matrix,round(math.cos(angle)))
-    update_matrix(1,2,matrix,-1*round(math.sin(angle)))
-    update_matrix(2,1,matrix,round(math.sin(angle)))
-    update_matrix(2,2,matrix,round(math.cos(angle)))
+    update_matrix(1,1,matrix,(math.cos(angle)))
+    update_matrix(1,2,matrix,-1*(math.sin(angle)))
+    update_matrix(2,1,matrix,(math.sin(angle)))
+    update_matrix(2,2,matrix,(math.cos(angle)))
     return matrix
 
 def y_rotation(angle):
     angle=math.radians(angle)
     matrix=new_matrix(4,4)
     ident(matrix)
-    update_matrix(0,0,matrix,round(math.cos(angle)))
-    update_matrix(0,2,matrix,round(math.sin(angle)))
-    update_matrix(2,0,matrix,round(-1*math.sin(angle)))
-    update_matrix(2,2,matrix,round(math.cos(angle)))
+    update_matrix(0,0,matrix,(math.cos(angle)))
+    update_matrix(0,2,matrix,(math.sin(angle)))
+    update_matrix(2,0,matrix,(-1*math.sin(angle)))
+    update_matrix(2,2,matrix,(math.cos(angle)))
     return matrix
 
 
@@ -243,10 +243,10 @@ def z_rotation(angle):
     angle=math.radians(angle)
     matrix=new_matrix(4,4)
     ident(matrix)
-    update_matrix(0,0,matrix,round(math.cos(angle)))
-    update_matrix(0,1,matrix,-1*round(math.sin(angle)))
-    update_matrix(1,0,matrix,round(math.sin(angle)))
-    update_matrix(1,1,matrix,round(math.cos(angle)))
+    update_matrix(0,0,matrix,(math.cos(angle)))
+    update_matrix(0,1,matrix,-1*(math.sin(angle)))
+    update_matrix(1,0,matrix,(math.sin(angle)))
+    update_matrix(1,1,matrix,(math.cos(angle)))
     return matrix          
     
 
@@ -268,7 +268,6 @@ info=fl2.readlines()
 for a in range(len(info)):
         key=info[a].strip()
         if key=="line":
-            print(info[a+1].split())
             fin_info=info[a+1].split()
             add_edge(edge_matrix,int(fin_info[0]),int(fin_info[1]),int(fin_info[2]),int(fin_info[3]),int(fin_info[4]),int(fin_info[5]))
         elif key=="move":
@@ -279,12 +278,15 @@ for a in range(len(info)):
             matrix_multiplication(scale(int(fin_info[0]),int(fin_info[1]),int(fin_info[2])),transformation_matrix)
         elif key=="rotate":
             fin_info=info[a+1].split()
-            matrix_multiplication(rotation(int(fin_info[1]),fin_info[0]),transformation_matrix)
-        elif key=="apply":
+            print_matrix(rotation(int(fin_info[1]),fin_info[0]))
             print_matrix(transformation_matrix)
+            matrix_multiplication(rotation(int(fin_info[1]),fin_info[0]),transformation_matrix)
+            print_matrix(transformation_matrix)
+        elif key=="apply":
             print_matrix(edge_matrix)
             apply(transformation_matrix,edge_matrix)
             print_matrix(edge_matrix)
+            #print_matrix(transformation_matrix)
             add_lines(edge_matrix,["0","255","0"])
         elif key=="ident":
             ident(transformation_matrix)
